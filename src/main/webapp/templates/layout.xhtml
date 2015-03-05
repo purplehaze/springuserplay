@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>
+            Smart4Life - Spring/JSF Play
+        </title>
+        <h:outputStylesheet library="css" name="main.css" />
+    </h:head>
+
+    <h:body>
+        <p:growl id="growl"
+                 showDetail="true"
+                 sticky="false"
+                 autoUpdate="true"
+                 globalOnly="false"
+                 severity="info,warn"
+                 life="10000"/>
+
+        <p:growl id="errorGrowl"
+                 sticky="true"
+                 autoUpdate="true"
+                 globalOnly="false"
+                 severity="error"/>
+
+        <p:layout id="mainLayout" fullPage="true" stateful="true">
+<ui:remove>
+            <p:layoutUnit position="north" size="200" resizable="false"
+                          closable="false" collapsible="false" styleClass="ui-layout-unit-content">
+                <ui:include src="/templates/menu.xhtml" />
+            </p:layoutUnit>
+</ui:remove>
+            <p:layoutUnit position="south" size="50" resizable="false"
+                          closable="false" collapsible="false">
+                <ui:include src="/templates/footer.xhtml" />
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" style="overflow:auto !important;" id="defaultLayoutUnitCenter">
+                <ui:include src="/templates/menu.xhtml" />
+
+
+                <ui:insert name="body">
+                    [Template content will be inserted here]
+                </ui:insert>
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+
+</f:view>
+</html>

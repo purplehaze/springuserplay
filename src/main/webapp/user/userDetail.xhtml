@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+        >
+<ui:composition template="/templates/layout.xhtml">
+    <ui:define name="body">
+    <div id="container">
+        <h1>Edit User</h1>
+        <h:form id="userDetailForm">
+            <p:panelGrid>
+                <p:row>
+                    <p:column><p:outputLabel for="id" value="ID"/></p:column>>
+                    <p:column><p:inputText value="#{userDetailController.entity.id}" id="id" required="true"/></p:column>>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel for="loginname" value="Loginname"/></p:column>>
+                    <p:column><p:inputText value="#{userDetailController.entity.loginname}" id="loginname" required="true"/></p:column>>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel for="pass" value="Pass"/></p:column>>
+                    <p:column><p:inputText value="#{userDetailController.entity.password}" id="pass"/></p:column>>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <p:commandButton value="Save" action="#{userDetailController.save}" update="@form" process="@form"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandButton value="To List" action="#{userDetailController.toList}" />
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+        </h:form>
+    </div>
+    </ui:define>
+</ui:composition>
+</html>
