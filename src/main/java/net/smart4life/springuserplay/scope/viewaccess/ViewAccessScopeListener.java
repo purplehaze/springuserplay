@@ -18,18 +18,23 @@ public class ViewAccessScopeListener implements PhaseListener {
 
     @Override
     public void afterPhase(PhaseEvent event) {
-        if(PhaseId.RENDER_RESPONSE.equals(event.getPhaseId())){
-            ViewAccessScopeContainer container = getContainer();
-            container.onRequestEnd();
+        if(PhaseId.RESTORE_VIEW.equals(event.getPhaseId())){
+            log.debug("viewAccessBeans {}", getContainer().getBeanNamesInContainer());
+            boolean isPartialRequest = FacesContext.getCurrentInstance().getPartialViewContext().isPartialRequest();
+            if(!isPartialRequest) {
+                ViewAccessScopeContainer container = getContainer();
+                container.moveViewContainer();
+                log.debug("viewAccessBeans after move {}", getContainer().getBeanNamesInContainer());
+            }
         }
     }
 
     @Override
     public void beforePhase(PhaseEvent event) {
-        if(PhaseId.RESTORE_VIEW.equals(event.getPhaseId())){
-            ViewAccessScopeContainer container = getContainer();
-            container.onRequestStart();
-        }
+//        if(PhaseId.RESTORE_VIEW.equals(event.getPhaseId())){
+//            ViewAccessScopeContainer container = getContainer();
+//            container.onRequestStart();
+//        }
     }
 
     private ViewAccessScopeContainer getContainer(){

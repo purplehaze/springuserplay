@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.faces.context.FacesContext;
+import javax.faces.context.PartialViewContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
@@ -18,20 +19,22 @@ public class LifeCycleListener implements PhaseListener {
     @Override
     public void afterPhase(PhaseEvent event) {
         String msg = formatRequestInfo(event);
-//        log.debug("!!!!!!!!! after{}", msg);
+        log.debug("--- after{}", msg);
     }
 
     @Override
     public void beforePhase(PhaseEvent event) {
         String msg = formatRequestInfo(event);
-//        log.debug("!!!!!!!!! before{}", msg);
+        log.debug("--- before{}", msg);
     }
 
     private String formatRequestInfo(PhaseEvent event){
         FacesContext ctx = FacesContext.getCurrentInstance();
         String viewId = null;
-        String wId = null;
-        boolean wEnabled = false;
+        Boolean isPostback = null;
+        Boolean isPartialRequest = null;
+        Boolean isRenderAll = null;
+        Boolean isResetValues = null;
         if(ctx == null){
             viewId = "context is null";
         } else {
@@ -40,16 +43,20 @@ public class LifeCycleListener implements PhaseListener {
             } else {
                 viewId = ctx.getViewRoot().getViewId();
             }
-            ClientWindow clientWindow = ctx.getExternalContext().getClientWindow();
-            if(clientWindow != null)
-            {
-                wId = clientWindow.getId();
-                wEnabled = clientWindow.isClientWindowRenderModeEnabled(ctx);
-            } else {
-                wId = "clientWindowIsNull";
-            }
+
+            isPostback = ctx.isPostback();
+            PartialViewContext pwc = ctx.getPartialViewContext();
+            isPartialRequest = pwc.isPartialRequest();
+            isRenderAll = pwc.isRenderAll();
+            isResetValues = pwc.isResetValues();
         }
-        return String.format("Phase(phaseId=%s, viewId=%s, wId=%s, wEnabled=%s", event.getPhaseId(), viewId, wId, wEnabled);
+        return String.format("Phase(phaseId=%s, viewId=%s, isPostback=%s, isPartialRequest=%s, isRenderAll=%s, isResetValues=%s",
+                event.getPhaseId(),
+                viewId,
+                isPostback,
+                isPartialRequest,
+                isRenderAll,
+                isResetValues);
     }
 
     @Override

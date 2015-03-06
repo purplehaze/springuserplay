@@ -24,10 +24,10 @@ public class UserFactory implements Serializable {
     private void init(){
         users = new ArrayList<>();
 
-        for(int i=0; i < names.length ; i++){
+        for(long i=0; i < names.length ; i++){
             User u = new User();
             u.setId(i+1);
-            u.setLoginname(names[i]);
+            u.setLoginname(names[Integer.parseInt(""+i)]);
             u.setPassword("geheim");
             users.add(u);
         }
@@ -37,7 +37,7 @@ public class UserFactory implements Serializable {
         return users;
     }
 
-    public User getById(Integer id)
+    public User getById(Long id)
     {
         User user = null;
         for(User u : users){

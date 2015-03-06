@@ -7,9 +7,9 @@ import javax.validation.constraints.Size;
  * Created by roman on 16.02.2015.
  */
 
-public class User {
+public class User implements Idable<Long> {
     @NotNull
-    private Integer id;
+    private Long id;
 
     @NotNull
     @Size(max = 10, min = 2)
@@ -17,11 +17,11 @@ public class User {
 
     private String password;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

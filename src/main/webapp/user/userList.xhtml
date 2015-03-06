@@ -10,9 +10,12 @@
     <ui:define name="body">
     <div id="container">
         <h1>Users </h1>
+
+        <ui:include src="userFilter.xhtml" />
+
         <h:form id="userListForm">
-            <p:dataTable value="#{userListController.users}" var="_u" rows="5" paginator="true"
-                         selection="#{userListController.entity}" selectionMode="single" rowKey="#{_u.id}">
+            <p:dataTable value="#{userListController.dataModel}" var="_u" rows="5" paginator="true"
+                         selection="#{userListController.selectedElement}" selectionMode="single">
                 <p:ajax event="rowSelect" listener="#{userListController.onRowSelect}" />
 
                 <p:column headerText="ID" filterBy="#{_u.id}" sortBy="#{_u.id}">

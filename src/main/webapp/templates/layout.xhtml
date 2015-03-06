@@ -44,10 +44,11 @@
             <p:layoutUnit position="center" style="overflow:auto !important;" id="defaultLayoutUnitCenter">
                 <ui:include src="/templates/menu.xhtml" />
 
-
+                <p:outputPanel id="content">
                 <ui:insert name="body">
                     [Template content will be inserted here]
                 </ui:insert>
+                </p:outputPanel>
             </p:layoutUnit>
 
         </p:layout>

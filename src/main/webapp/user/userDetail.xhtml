@@ -8,6 +8,7 @@
         >
 <ui:composition template="/templates/layout.xhtml">
     <ui:define name="body">
+        <h:inputHidden value="#{userFilterController}" id="filterReference" />
     <div id="container">
         <h1>Edit User</h1>
         <h:form id="userDetailForm">
