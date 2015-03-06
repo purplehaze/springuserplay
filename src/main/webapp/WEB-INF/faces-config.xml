@@ -27,4 +27,8 @@
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
     </application>
 
+    <lifecycle>
+        <phase-listener>net.smart4life.springuserplay.listener.LifeCycleListener</phase-listener>
+        <phase-listener>net.smart4life.springuserplay.scope.viewaccess.ViewAccessScopeListener</phase-listener>
+    </lifecycle>
 </faces-config>

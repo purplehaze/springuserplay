@@ -3,6 +3,7 @@ package net.smart4life.springuserplay.user;
 import net.smart4life.springuserplay.UserFactory;
 import net.smart4life.springuserplay.entity.User;
 import net.smart4life.springuserplay.scope.ViewScoped;
+import net.smart4life.springuserplay.scope.viewaccess.ViewAccessScoped;
 import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,7 @@ import java.util.List;
  * Created by roman on 16.02.2015.
  */
 @Component
-@ViewScoped
+@ViewAccessScoped
 public class UserListController implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(UserListController.class);
 

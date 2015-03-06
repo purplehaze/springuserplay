@@ -3,6 +3,7 @@ package net.smart4life.springuserplay.user;
 import net.smart4life.springuserplay.UserFactory;
 import net.smart4life.springuserplay.entity.User;
 import net.smart4life.springuserplay.scope.ViewScoped;
+import net.smart4life.springuserplay.scope.viewaccess.ViewAccessScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,7 @@ import java.util.Map;
  * Created by roman on 16.02.2015.
  */
 @Controller
-@ViewScoped
+@ViewAccessScoped
 public class UserDetailController implements Serializable {
 
     @Autowired
