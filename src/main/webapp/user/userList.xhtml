@@ -15,7 +15,8 @@
 
         <h:form id="userListForm">
             <p:dataTable value="#{userListController.dataModel}" var="_u" rows="5" paginator="true"
-                         selection="#{userListController.selectedElement}" selectionMode="single">
+                         selection="#{userListController.selectedElement}" selectionMode="single"
+                         first="#{userFilterController.filter.first}">
                 <p:ajax event="rowSelect" listener="#{userListController.onRowSelect}" />
 
                 <p:column headerText="ID" filterBy="#{_u.id}" sortBy="#{_u.id}">
