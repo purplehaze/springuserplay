@@ -31,6 +31,9 @@ public abstract class BaseController {
         StringBuilder sb = new StringBuilder();
         sb.append(outcome+"?");
         for(Map.Entry<String, String> entry: params.entrySet()){
+            if(!sb.toString().endsWith("?")){
+                sb.append("&");
+            }
             sb.append(entry.getKey()+"="+entry.getValue());
         }
         NavigationHandler myNav = fCtx.getApplication().getNavigationHandler();
