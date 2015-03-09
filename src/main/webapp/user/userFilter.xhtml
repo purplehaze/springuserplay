@@ -12,8 +12,8 @@
             <p:panelGrid id="userFilterGrid" columns="2">
                 <p:outputLabel value="Name" for="name" />
                 <p:inputText id="name" value="#{userFilterController.filter.name}" />
-                <p:column />
                 <p:commandButton value="Search" action="#{userListController.search}" process="@form" update=":content"/>
+                <p:commandButton value="Reset" action="#{userListController.reset}" process="@this" update=":content"/>
             </p:panelGrid>
         </h:form>
 

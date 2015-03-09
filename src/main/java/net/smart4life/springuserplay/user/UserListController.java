@@ -1,10 +1,11 @@
 package net.smart4life.springuserplay.user;
 
-import net.smart4life.springuserplay.UserFactory;
+import net.smart4life.springuserplay.datamodel.BaseFilter;
+import net.smart4life.springuserplay.datamodel.GenericLazyDataModel;
+import net.smart4life.springuserplay.service.UserService;
 import net.smart4life.springuserplay.controller.BaseController;
 import net.smart4life.springuserplay.datamodel.GenericIdableListDataModel;
 import net.smart4life.springuserplay.entity.User;
-import net.smart4life.springuserplay.scope.ViewScoped;
 import net.smart4life.springuserplay.scope.viewaccess.ViewAccessScoped;
 import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
@@ -13,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.NavigationHandler;
-import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class UserListController extends BaseController implements Serializable {
     public static final String PAGE_DETAIL = "userDetail.xhtml";
 
     @Autowired
-    private UserFactory userFactory;
+    private UserService userService;
 
     @Autowired
     private UserFilterController userFilterController;
@@ -44,20 +43,31 @@ public class UserListController extends BaseController implements Serializable {
         createDataModel();
     }
 
-    private void createDataModel(){
-        List<User> users = userFactory.getUsers();
-        String name = userFilterController.getFilter().getName();
-        if(name != null && !name.isEmpty()){
-            List<User> tmp = new ArrayList<>();
-            for (User u : users){
-                if(u.getLoginname().toLowerCase().startsWith(name.toLowerCase())){
-                    tmp.add(u);
-                }
-            }
-            users = tmp;
-        }
-        dataModel = new GenericIdableListDataModel<>(users);
-    }
+	// create non lazy data model
+//	private void createDataModel(){
+//		List<User> users = userService.getUsers();
+//		String name = userFilterController.getFilter().getName();
+//		if(name != null && !name.isEmpty()){
+//			List<User> tmp = new ArrayList<>();
+//			for (User u : users){
+//				if(u.getLoginname().toLowerCase().startsWith(name.toLowerCase())){
+//					tmp.add(u);
+//				}
+//			}
+//			users = tmp;
+//		}
+//		dataModel = new GenericIdableListDataModel<>(users);
+//	}
+
+	// create lazy data model
+	private void createDataModel(){
+		dataModel = new GenericLazyDataModel<User, UserFilter>(userService) {
+			@Override
+			public UserFilter getFilter() {
+				return userFilterController.getFilter();
+			}
+		};
+	}
 
     public void onRowSelect(SelectEvent event) {
         User u = (User) event.getObject();

@@ -1,15 +1,12 @@
 package net.smart4life.springuserplay.user;
 
+import net.smart4life.springuserplay.datamodel.BaseFilter;
+
 /**
  * Created by roman on 06.03.2015.
  */
-public class UserFilter {
+public class UserFilter extends BaseFilter {
     private String name;
-
-    private int first;
-    private String sortOrder = "ascending"; // "ascending" | "descending"
-    private Object sortBy;
-    private String sortField;
 
     public String getName() {
         return name;
@@ -19,35 +16,4 @@ public class UserFilter {
         this.name = name;
     }
 
-    public int getFirst() {
-        return first;
-    }
-
-    public void setFirst(int first) {
-        this.first = first;
-    }
-
-    public String getSortOrder() {
-        return sortOrder;
-    }
-
-    public void setSortOrder(String sortOrder) {
-        this.sortOrder = sortOrder;
-    }
-
-    public Object getSortBy() {
-        return sortBy;
-    }
-
-    public void setSortBy(Object sortBy) {
-        this.sortBy = sortBy;
-    }
-
-    public String getSortField() {
-        return sortField;
-    }
-
-    public void setSortField(String sortField) {
-        this.sortField = sortField;
-    }
 }

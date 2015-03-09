@@ -16,7 +16,10 @@
         <h:form id="userListForm">
             <p:dataTable value="#{userListController.dataModel}" var="_u" rows="5" paginator="true"
                          selection="#{userListController.selectedElement}" selectionMode="single"
-                         first="#{userFilterController.filter.first}">
+                         first="#{userFilterController.filter.first}"
+                         sortField="#{userFilterController.filter.sortField}"
+                         sortOrder="#{userFilterController.filter.sortOrder}"
+                        lazy="true">
                 <p:ajax event="rowSelect" listener="#{userListController.onRowSelect}" />
 
                 <p:column headerText="ID" filterBy="#{_u.id}" sortBy="#{_u.id}">

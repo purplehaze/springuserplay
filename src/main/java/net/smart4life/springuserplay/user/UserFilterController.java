@@ -1,6 +1,7 @@
 package net.smart4life.springuserplay.user;
 
 import net.smart4life.springuserplay.scope.viewaccess.ViewAccessScoped;
+import org.primefaces.model.SortOrder;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +14,8 @@ import javax.annotation.PostConstruct;
 public class UserFilterController {
 
     private UserFilter filter;
+	private String sortField;
+	private String sortOrder = SortOrder.ASCENDING.name();
 
     @PostConstruct
     private void init(){
@@ -30,4 +33,20 @@ public class UserFilterController {
     public void setFilter(UserFilter filter) {
         this.filter = filter;
     }
+
+	public String getSortField() {
+		return sortField;
+	}
+
+	public void setSortField(String sortField) {
+		this.sortField = sortField;
+	}
+
+	public String getSortOrder() {
+		return sortOrder;
+	}
+
+	public void setSortOrder(String sortOrder) {
+		this.sortOrder = sortOrder;
+	}
 }

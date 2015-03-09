@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
 */
-package net.smart4life.springuserplay;
+package net.smart4life.springuserplay.service;
 
 import org.springframework.stereotype.Component;
 
