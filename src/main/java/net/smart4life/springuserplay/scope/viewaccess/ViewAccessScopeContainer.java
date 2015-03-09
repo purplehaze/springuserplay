@@ -20,14 +20,6 @@ public class ViewAccessScopeContainer implements Serializable {
         containerList.add(new HashMap<String, Object>());
     }
 
-//    public void onRequestStart(){
-//        containerList.add(new HashMap<String, Object>());
-//    }
-//
-//    public void onRequestEnd(){
-//        containerList.remove(0);
-//    }
-
     public void moveViewContainer(){
         logger.debug("!!!!! start moveViewContainer() size={}", containerList.size());
         containerList.add(new HashMap<String, Object>());

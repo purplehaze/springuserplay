@@ -82,11 +82,11 @@ public abstract class GenericLazyDataModel<T extends Idable, F extends BaseFilte
 		if(rowKey != null && !rowKey.isEmpty())
 		{
 			List<T> entities = (List<T>)getWrappedData();
-			for(T entity : entities)
-			{
-				if(rowKey.equals(entity.getId().toString()))
-				{
-					ret = entity;
+			if(entities != null) {
+				for (T entity : entities) {
+					if (rowKey.equals(entity.getId().toString())) {
+						ret = entity;
+					}
 				}
 			}
 		}
