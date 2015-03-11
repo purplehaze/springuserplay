@@ -10,7 +10,7 @@
     <logger name="net.smart4life" level="DEBUG"/>
 
 
-    <root level="WARN">
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>
