@@ -35,6 +35,7 @@ public class LifeCycleListener implements PhaseListener {
         Boolean isPartialRequest = null;
         Boolean isRenderAll = null;
         Boolean isResetValues = null;
+		String clientWindowId = null;
         if(ctx == null){
             viewId = "context is null";
         } else {
@@ -49,14 +50,22 @@ public class LifeCycleListener implements PhaseListener {
             isPartialRequest = pwc.isPartialRequest();
             isRenderAll = pwc.isRenderAll();
             isResetValues = pwc.isResetValues();
+
+			ClientWindow clientWindow = ctx.getExternalContext().getClientWindow();
+			if(clientWindow != null){
+				clientWindowId = clientWindow.getId();
+			} else {
+				clientWindowId = "Client Window is null";
+			}
         }
-        return String.format("Phase(phaseId=%s, viewId=%s, isPostback=%s, isPartialRequest=%s, isRenderAll=%s, isResetValues=%s",
+        return String.format("Phase(phaseId=%s, viewId=%s, isPostback=%s, isPartialRequest=%s, isRenderAll=%s, isResetValues=%s, clientWindowId=%s",
                 event.getPhaseId(),
                 viewId,
                 isPostback,
                 isPartialRequest,
                 isRenderAll,
-                isResetValues);
+                isResetValues,
+				clientWindowId);
     }
 
     @Override

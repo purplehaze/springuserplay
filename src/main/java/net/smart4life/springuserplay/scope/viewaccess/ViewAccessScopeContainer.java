@@ -21,14 +21,14 @@ public class ViewAccessScopeContainer implements Serializable {
     }
 
     public void moveViewContainer(){
-        logger.debug("!!!!! start moveViewContainer() size={}", containerList.size());
+//        logger.debug("!!!!! start moveViewContainer() size={}", containerList.size());
         containerList.add(new HashMap<String, Object>());
         while (containerList.size() > 2){
             Map<String, Object> map = containerList.get(0);
             map.clear();
             containerList.remove(0);
         }
-        logger.debug("!!!!! end moveViewContainer() size={}", containerList.size());
+//        logger.debug("!!!!! end moveViewContainer() size={}", containerList.size());
     }
 
     public Object get(String name){
