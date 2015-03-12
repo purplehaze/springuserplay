@@ -78,7 +78,7 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<version>7.0.34</version>
 		</dependency>
-<!--
+<!-- -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
@@ -89,8 +89,8 @@
 			<artifactId>jsf-impl</artifactId>
 			<version>2.2.10</version>
 		</dependency>
--->
-<!-- -->
+
+<!--
         <dependency>
             <groupId>org.apache.myfaces.core</groupId>
             <artifactId>myfaces-api</artifactId>
@@ -102,7 +102,7 @@
             <artifactId>myfaces-impl</artifactId>
             <version>2.2.7</version>
         </dependency>
-
+ -->
 
 		<!--
 		<dependency>

@@ -4,9 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.Scope;
+import org.springframework.web.jsf.FacesContextUtils;
 
 import javax.faces.context.FacesContext;
-import javax.faces.lifecycle.ClientWindow;
 import java.util.Map;
 
 
@@ -14,12 +14,13 @@ public class ViewAccessScope implements Scope {
     private static final Logger log = LoggerFactory.getLogger(ViewAccessScope.class);
 
     public static final String NAME = "viewAccess";
+    public static final String MAX_WINDOWS_PARAM = "viewAccessScope.max.windows";
 
     @Override
 	public Object get(String name, ObjectFactory<?> objectFactory) {
         log.debug("get() viewAccessScoped bean={}", name);
 
-		ViewAccessScopeContainer container = getContainer();
+		VasContainer container = getContainer();
 		Object bean = container.get(name);
 
 		if (bean == null) {
@@ -31,13 +32,9 @@ public class ViewAccessScope implements Scope {
 		return bean;
 	}
 
-    private ViewAccessScopeContainer getContainer(){
-        Map<String, Object> sessMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        ViewAccessScopeContainer container = (ViewAccessScopeContainer) sessMap.get(ViewAccessScopeContainer.NAME);
-        if(container == null){
-            container = new ViewAccessScopeContainer();
-            sessMap.put(ViewAccessScopeContainer.NAME, container);
-        }
+    private VasContainer getContainer(){
+        VasWindowsContainer vasWindowsContainer = FacesContextUtils.getWebApplicationContext(FacesContext.getCurrentInstance()).getBean(VasWindowsContainer.class);
+        VasContainer container = vasWindowsContainer.getVasContainer();
 
         return container;
     }
@@ -50,7 +47,7 @@ public class ViewAccessScope implements Scope {
     @Override
 	public Object remove(String name) {
         log.debug("!!! remove viewAccessScope bean={}", name);
-		ViewAccessScopeContainer container = getContainer();
+		VasContainer container = getContainer();
 		return container.remove(name);
 	}
 

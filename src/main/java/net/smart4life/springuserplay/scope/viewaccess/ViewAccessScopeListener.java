@@ -2,12 +2,12 @@ package net.smart4life.springuserplay.scope.viewaccess;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.jsf.FacesContextUtils;
 
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
-import javax.faces.lifecycle.ClientWindow;
 import java.util.Map;
 
 /**
@@ -22,7 +22,7 @@ public class ViewAccessScopeListener implements PhaseListener {
 //            log.debug("viewAccessBeans {}", getContainer().getBeanNamesInContainer());
             boolean isPartialRequest = FacesContext.getCurrentInstance().getPartialViewContext().isPartialRequest();
             if(!isPartialRequest) {
-                ViewAccessScopeContainer container = getContainer();
+                VasContainer container = getContainer();
                 container.moveViewContainer();
 //                log.debug("viewAccessBeans after move {}", getContainer().getBeanNamesInContainer());
             }
@@ -37,13 +37,9 @@ public class ViewAccessScopeListener implements PhaseListener {
 //        }
     }
 
-    private ViewAccessScopeContainer getContainer(){
-        Map<String, Object> sessMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        ViewAccessScopeContainer container = (ViewAccessScopeContainer) sessMap.get(ViewAccessScopeContainer.NAME);
-        if(container == null){
-            container = new ViewAccessScopeContainer();
-            sessMap.put(ViewAccessScopeContainer.NAME, container);
-        }
+    private VasContainer getContainer(){
+        VasWindowsContainer vasWindowsContainer = FacesContextUtils.getWebApplicationContext(FacesContext.getCurrentInstance()).getBean(VasWindowsContainer.class);
+        VasContainer container = vasWindowsContainer.getVasContainer();
 
         return container;
     }

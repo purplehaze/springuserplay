@@ -9,15 +9,18 @@ import java.util.*;
 /**
  * Created by roman on 06.03.2015.
  */
-public class ViewAccessScopeContainer implements Serializable {
-    private static final Logger logger = LoggerFactory.getLogger(ViewAccessScopeContainer.class);
+public class VasContainer implements Serializable {
+    private static final Logger logger = LoggerFactory.getLogger(VasContainer.class);
 
-    public static final String NAME = ViewAccessScopeContainer.class.getName();
+    public static final String NAME = VasContainer.class.getName();
 
     private List<Map<String, Object>> containerList = new ArrayList<>();
+    private final String windowId;
+    private long lastAccess = 0;
 
-    public ViewAccessScopeContainer(){
+    public VasContainer(String windowId){
         containerList.add(new HashMap<String, Object>());
+        this.windowId = windowId;
     }
 
     public void moveViewContainer(){
@@ -44,11 +47,15 @@ public class ViewAccessScopeContainer implements Serializable {
             }
         }
 
+        lastAccess = System.currentTimeMillis();
+
         return bean;
     }
 
     public void put(String name, Object bean){
         containerList.get(containerList.size() - 1).put(name, bean);
+
+        lastAccess = System.currentTimeMillis();
     }
 
     public Object remove(String name){
@@ -64,5 +71,21 @@ public class ViewAccessScopeContainer implements Serializable {
 
     public Set<String> getBeanNamesInContainer(){
         return containerList.get(containerList.size() - 1).keySet();
+    }
+
+    public void destroy(){
+        for(Map<String, Object> map : containerList){
+            map.clear();
+        }
+        containerList.clear();
+        containerList = null;
+    }
+
+    public long getLastAccess() {
+        return lastAccess;
+    }
+
+    public String getWindowId() {
+        return windowId;
     }
 }
